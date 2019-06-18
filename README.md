@@ -8,7 +8,7 @@ Progress of alpha matting project
     be used with OpenCV's DNN module and to integrate some of the best computer vision based best alpha matting algorithms into 
     OpenCV.
 
-# Expected Outcomes:
+### Expected Outcomes:
    
   1.    A large dataset which can be used to train models of alpha matting.
    
