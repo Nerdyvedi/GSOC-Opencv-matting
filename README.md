@@ -1,5 +1,5 @@
 # GSOC-Opencv
-Progress of alpha Dmatting project
+Progress of alpha matting project
 
 ## Alpha Matting
 
