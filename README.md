@@ -37,7 +37,7 @@ Progress of alpha matting project
  ### Updates: 
  
  1. Read and understood the architecture of each paper. Wrote an article explaining the papers
-    [Understanding AlphaGAN matting](https://medium.com/vedacv/understanding-alphagan-matting-1dfae112a412?source=friends_link&sk=75a7bbf958afbf92f5dc53a4c5ff10d4)
+    [Understanding AlphaGAN matting](https://medium.com/vedacv/understanding-alphagan-matting-1dfae112a412?source=friends_link&sk=75a7bbf958afbf92f5dc53a4c5ff10d4),
     [Paper Summary:Global sampling method for Alpha matting](https://medium.com/vedacv/paper-summary-a-global-sampling-method-for-alpha-matting-490a4217eb2)
     
  2.  Learnt how to use gimp, to create the dataset for the deep learning based model.
