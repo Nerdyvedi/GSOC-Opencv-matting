@@ -32,4 +32,23 @@ Progress of alpha matting project
     
       Mentors: Steven Puttemans,Gholamreza Amayeh,Sunita Nayak
       Difficulty: Medium-Hard
+      
+ 
+ ### Updates: 
+ 
+ 1. Read and understood the architecture of each paper. Wrote an article explaining the papers
+    [Understanding AlphaGAN matting](https://medium.com/vedacv/understanding-alphagan-matting-1dfae112a412?source=friends_link&sk=75a7bbf958afbf92f5dc53a4c5ff10d4)
+    [Paper Summary:Global sampling method for Alpha matting](https://medium.com/vedacv/paper-summary-a-global-sampling-method-for-alpha-matting-490a4217eb2)
+    
+ 2.  Learnt how to use gimp, to create the dataset for the deep learning based model.
+ 
+ 3.  Implemented Global sampling based method for alpha matting.
+ 
+ 4.  Verified the implementation is correct. Checked the implementation on Alphamatting.com. Here are the results.[Link](https://drive.google.com/file/d/12BW2q3kEfAoZtR4P6DRzQYCraMbkUsPX/view?usp=sharing) 
+     (Global sampling method-Vedanta is my implementation)
+  
+ 5. Implemented AlphaGAN matting, but the results even when trained on Adobe dataset is not satisfactory.
+    #### Working on improving this now
+    
+ 6. Generated alpha matte for about 100 images using gimp.[Link](https://drive.google.com/drive/folders/12esYUgcR5PDl_wfZXF9dBpNwvO_60yL9)   
 
