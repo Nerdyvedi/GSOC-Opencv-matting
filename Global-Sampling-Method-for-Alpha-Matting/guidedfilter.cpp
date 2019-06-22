@@ -17,10 +17,10 @@ static cv::Mat convertTo(const cv::Mat &mat, int depth)
     return result;
 }
 
-class GuidedFilterImpl
+class guidedFilterImpl
 {
 public:
-    virtual ~GuidedFilterImpl() {}
+    virtual ~guidedFilterImpl() {}
 
     cv::Mat filter(const cv::Mat &p, int depth);
 
@@ -31,10 +31,10 @@ private:
     virtual cv::Mat filterSingleChannel(const cv::Mat &p) const = 0;
 };
 
-class GuidedFilterMono : public GuidedFilterImpl
+class guidedFilterMono : public guidedFilterImpl
 {
 public:
-    GuidedFilterMono(const cv::Mat &I, int r, double eps);
+    guidedFilterMono(const cv::Mat &I, int r, double eps);
 
 private:
     virtual cv::Mat filterSingleChannel(const cv::Mat &p) const;
@@ -45,10 +45,10 @@ private:
     cv::Mat I, mean_I, var_I;
 };
 
-class GuidedFilterColor : public GuidedFilterImpl
+class guidedFilterColor : public guidedFilterImpl
 {
 public:
-    GuidedFilterColor(const cv::Mat &I, int r, double eps);
+    guidedFilterColor(const cv::Mat &I, int r, double eps);
 
 private:
     virtual cv::Mat filterSingleChannel(const cv::Mat &p) const;
@@ -62,7 +62,7 @@ private:
 };
 
 
-cv::Mat GuidedFilterImpl::filter(const cv::Mat &p, int depth)
+cv::Mat guidedFilterImpl::filter(const cv::Mat &p, int depth)
 {
     cv::Mat p2 = convertTo(p, Idepth);
 
@@ -85,7 +85,7 @@ cv::Mat GuidedFilterImpl::filter(const cv::Mat &p, int depth)
     return convertTo(result, depth == -1 ? p.depth() : depth);
 }
 
-GuidedFilterMono::GuidedFilterMono(const cv::Mat &origI, int r, double eps) : r(r), eps(eps)
+guidedFilterMono::guidedFilterMono(const cv::Mat &origI, int r, double eps) : r(r), eps(eps)
 {
     if (origI.depth() == CV_32F || origI.depth() == CV_64F)
         I = origI.clone();
@@ -99,7 +99,7 @@ GuidedFilterMono::GuidedFilterMono(const cv::Mat &origI, int r, double eps) : r(
     var_I = mean_II - mean_I.mul(mean_I);
 }
 
-cv::Mat GuidedFilterMono::filterSingleChannel(const cv::Mat &p) const
+cv::Mat guidedFilterMono::filterSingleChannel(const cv::Mat &p) const
 {
     cv::Mat mean_p = boxfilter(p, r);
     cv::Mat mean_Ip = boxfilter(I.mul(p), r);
@@ -114,7 +114,7 @@ cv::Mat GuidedFilterMono::filterSingleChannel(const cv::Mat &p) const
     return mean_a.mul(I) + mean_b;
 }
 
-GuidedFilterColor::GuidedFilterColor(const cv::Mat &origI, int r, double eps) : r(r), eps(eps)
+guidedFilterColor::guidedFilterColor(const cv::Mat &origI, int r, double eps) : r(r), eps(eps)
 {
     cv::Mat I;
     if (origI.depth() == CV_32F || origI.depth() == CV_64F)
@@ -160,7 +160,7 @@ GuidedFilterColor::GuidedFilterColor(const cv::Mat &origI, int r, double eps) : 
     invbb /= covDet;
 }
 
-cv::Mat GuidedFilterColor::filterSingleChannel(const cv::Mat &p) const
+cv::Mat guidedFilterColor::filterSingleChannel(const cv::Mat &p) const
 {
     cv::Mat mean_p = boxfilter(p, r);
 
@@ -186,7 +186,7 @@ cv::Mat GuidedFilterColor::filterSingleChannel(const cv::Mat &p) const
 }
 
 
-GuidedFilter::GuidedFilter(const cv::Mat &I, int r, double eps)
+guidedFilter::guidedFilter(const cv::Mat &I, int r, double eps)
 {
     CV_Assert(I.channels() == 1 || I.channels() == 3);
 
@@ -196,12 +196,12 @@ GuidedFilter::GuidedFilter(const cv::Mat &I, int r, double eps)
         impl_ = new GuidedFilterColor(I, 2 * r + 1, eps);
 }
 
-GuidedFilter::~GuidedFilter()
+guidedFilter::~guidedFilter()
 {
     delete impl_;
 }
 
-cv::Mat GuidedFilter::filter(const cv::Mat &p, int depth) const
+cv::Mat guidedFilter::filter(const cv::Mat &p, int depth) const
 {
     return impl_->filter(p, depth);
 }
