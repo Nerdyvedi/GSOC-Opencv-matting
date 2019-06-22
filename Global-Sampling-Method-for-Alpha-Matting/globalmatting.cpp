@@ -93,16 +93,16 @@ static float nearestDistance(const std::vector<cv::Point> &boundary, const cv::P
 
 
 // for sorting the boundary pixels according to intensity
-struct IntensityComp
+struct intensityComp
 {
-    IntensityComp(const cv::Mat_<cv::Vec3b> &image) : image(image)
+    intensityComp(const cv::Mat_<cv::Vec3b> &image) : image(image)
     {
 
     }
 
     bool operator()(const cv::Point &p0, const cv::Point &p1) const
     {
-        const cv::Vec3b &c0 = image(p0.y, p0.x);
+        const cv::Vec3b &c0 = image(Ip0.y, p0.x);
         const cv::Vec3b &c1 = image(p1.y, p1.x);
 
         return ((int)c0[0] + (int)c0[1] + (int)c0[2]) < ((int)c1[0] + (int)c1[1] + (int)c1[2]);
@@ -194,7 +194,7 @@ static void erodeFB(cv::Mat_<uchar> &trimap, int r)
 }
 
 
-struct Sample
+struct sample
 {
     int fi, bj;
     float df, db;
@@ -205,12 +205,12 @@ static void calculateAlphaPatchMatch(const cv::Mat_<cv::Vec3b> &image,
         const cv::Mat_<uchar> &trimap,
         const std::vector<cv::Point> &foregroundBoundary,
         const std::vector<cv::Point> &backgroundBoundary,
-        std::vector<std::vector<Sample> > &samples)
+        std::vector<std::vector<sample> > &samples)
 {
     int w = image.cols;
     int h = image.rows;
 
-    samples.resize(h, std::vector<Sample>(w));
+    samples.resize(h, std::vector<sample>(w));
 
     for (int y = 0; y < h; ++y)
         for (int x = 0; x < w; ++x)
@@ -249,7 +249,7 @@ static void calculateAlphaPatchMatch(const cv::Mat_<cv::Vec3b> &image,
 
             const cv::Vec3b &I = image(y, x);
 
-            Sample &s = samples[y][x];
+            sample &s = samples[y][x];
 
             for (int y2 = y - 1; y2 <= y + 1; ++y2)
                 for (int x2 = x - 1; x2 <= x + 1; ++x2)
@@ -260,7 +260,7 @@ static void calculateAlphaPatchMatch(const cv::Mat_<cv::Vec3b> &image,
                     if (trimap(y2, x2) != 128)
                         continue;
 
-                    Sample &s2 = samples[y2][x2];
+                    sample &s2 = samples[y2][x2];
 
                     const cv::Point &fp = foregroundBoundary[s2.fi];
                     const cv::Point &bp = backgroundBoundary[s2.bj];
@@ -295,7 +295,7 @@ static void calculateAlphaPatchMatch(const cv::Mat_<cv::Vec3b> &image,
 
                 const cv::Vec3b &I = image(y, x);
 
-                Sample &s = samples[y][x];
+                sample &s = samples[y][x];
 
                 for (int k = 0; ; k++)
                 {
@@ -466,10 +466,10 @@ static void globalMattingHelper(cv::Mat _image, cv::Mat _trimap, cv::Mat &_foreg
             foregroundBoundary.push_back(cv::Point(x, y));
     }
 
-    std::sort(foregroundBoundary.begin(), foregroundBoundary.end(), IntensityComp(image));
-    std::sort(backgroundBoundary.begin(), backgroundBoundary.end(), IntensityComp(image));
+    std::sort(foregroundBoundary.begin(), foregroundBoundary.end(), intensityComp(image));
+    std::sort(backgroundBoundary.begin(), backgroundBoundary.end(), intensityComp(image));
 
-    std::vector<std::vector<Sample> > samples;
+    std::vector<std::vector<sample> > samples;
     calculateAlphaPatchMatch(image, trimap, foregroundBoundary, backgroundBoundary, samples);
 
     _foreground.create(image.size(), CV_8UC3);
