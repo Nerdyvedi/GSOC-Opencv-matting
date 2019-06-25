@@ -1,4 +1,8 @@
 #include "globalmatting.h"
+#include "opencv2/imgproc.hpp"
+#include "opencv2/highgui.hpp"
+#include <opencv2/ximgproc/edge_filter.hpp>
+using namespace cv;
 
 template <typename T>
 static inline T sqr(T a)
@@ -541,6 +545,7 @@ void globalMatting(cv::InputArray _image, cv::InputArray _trimap, cv::OutputArra
 // you can get the guided filter implementation
 // from https://github.com/atilimcetin/guided-filter
 #include "guidedfilter.h"
+//#include "ximgproc/edge_filter.hpp"
 
 int main()
 {
@@ -556,7 +561,8 @@ int main()
     globalMatting(image, trimap, foreground, alpha);
 
     // filter the result with fast guided filter
-    alpha = guidedFilter(image, alpha, 10, 1e-5);
+    //alpha = guidedFilter(image, alpha, 10, 1e-5);
+    cv::ximgproc::guidedFilter(image,alpha,alpha,10,1e-5);
     for (int x = 0; x < trimap.cols; ++x)
         for (int y = 0; y < trimap.rows; ++y)
         {
