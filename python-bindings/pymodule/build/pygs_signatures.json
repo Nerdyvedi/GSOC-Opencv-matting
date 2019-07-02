@@ -1,0 +1,1 @@
+{"gs::alphamatte": [{"ret": "foreground, alpha", "arg": "image, trimap[, foreground[, alpha]]", "name": "gs.alphamatte"}]}
