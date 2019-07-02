@@ -1,4 +1,4 @@
-##Files##
+## Files ##
 
 1. gs.cpp, pycompat.hpp : gs.cpp is a slightly modified version of the wrapper file (cv2.cpp) that comes with OpenCV. It uses pycompat.hpp for Python 2 / 3 compatibility checks.
 
@@ -10,7 +10,7 @@
 
 5. src/globalmatting.h:  This header file explictly mentions the classes and functions we want to export
 
-##Steps##
+## Steps ##
 
 
 Step 1: Put your c++ source code and header files inside the src directory.
