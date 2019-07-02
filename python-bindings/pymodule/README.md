@@ -14,7 +14,9 @@
 
 
 Step 1: Put your c++ source code and header files inside the src directory.
+
 Step 2: Include your header file in headers.txt
+
 Step 3: Make a build directory.
 
 ```
