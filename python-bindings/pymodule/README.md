@@ -1,4 +1,4 @@
-Following files are here:
+##Files##
 
 1. gs.cpp, pycompat.hpp : gs.cpp is a slightly modified version of the wrapper file (cv2.cpp) that comes with OpenCV. It uses pycompat.hpp for Python 2 / 3 compatibility checks.
 
@@ -10,5 +10,31 @@ Following files are here:
 
 5. src/globalmatting.h:  This header file explictly mentions the classes and functions we want to export
 
+##Steps##
 
 
+Step 1: Put your c++ source code and header files inside the src directory.
+Step 2: Include your header file in headers.txt
+Step 3: Make a build directory.
+
+```
+mkdir build
+```
+Step 4: Use gen2.py to generate the Python binding files. You need to specify the prefix (pybv), the location of the temporary files (build) and the location of the header files (headers.txt).
+```	
+python3 gen2.py pybv build headers.txt
+```
+This should generate a whole bunch of header files with prefix pybv_*.h. If you are curious, feel free to inspect the generated files.
+
+Step 5: Compile the module
+
+```
+g++ -shared -rdynamic -g -O3 -Wall -fPIC \
+gv.cpp src/bvmodule.cpp \
+-DMODULE_STR=bv -DMODULE_PREFIX=pygs \
+-DNDEBUG -DPY_MAJOR_VERSION=3 \
+`pkg-config --cflags --libs opencv`  \
+`python3-config --includes --ldflags` \
+-I . -I/usr/local/lib/python3.5/dist-packages/numpy/core/include \
+-o build/gsmat.so  
+```
