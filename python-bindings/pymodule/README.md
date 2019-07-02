@@ -24,9 +24,9 @@ mkdir build
 ```
 Step 4: Use gen2.py to generate the Python binding files. You need to specify the prefix (pybv), the location of the temporary files (build) and the location of the header files (headers.txt).
 ```	
-python3 gen2.py pybv build headers.txt
+python3 gen2.py pygs build headers.txt
 ```
-This should generate a whole bunch of header files with prefix pybv_*.h. If you are curious, feel free to inspect the generated files.
+This should generate a whole bunch of header files with prefix pygs_*.h. 
 
 Step 5: Compile the module
 
