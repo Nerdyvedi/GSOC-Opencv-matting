@@ -1,7 +1,7 @@
 # AlphaGAN-Matting
 Implementation of AlphaGAN, a Generative adversial method for natural image matting
 
-### Architecture ###
+## Architecture ##
 
 #### Generator ####  
 A decoder encoder based architecture is used. 
@@ -14,7 +14,7 @@ from
 https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
 
 
-### Results ###
+## Results ##
 
 Following are some of the samples generated from this model
 
@@ -26,3 +26,11 @@ Following are some of the samples generated from this model
 ![alt text](https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/alphagan-matting/AlphaMatting/results/img4.png) | ![alt text](https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/alphagan-matting/AlphaMatting/results/gt4.png) | ![alt text](https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/alphagan-matting/AlphaMatting/results/pred4.png) | 
 ![alt text](https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/alphagan-matting/AlphaMatting/results/img5.png) | ![alt text](https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/alphagan-matting/AlphaMatting/results/gt5.png) | ![alt text](https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/alphagan-matting/AlphaMatting/results/pred5.png) | 
 ![alt text](https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/alphagan-matting/AlphaMatting/results/img6.png) | ![alt text](https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/alphagan-matting/AlphaMatting/results/gt6.png) |![alt text](https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/alphagan-matting/AlphaMatting/results/pred6.png) |
+
+
+
+## Steps ##
+
+### Training ###
+ Use the following command to train the model
+ ``` train.py --which-model-netG resnet50 ```
