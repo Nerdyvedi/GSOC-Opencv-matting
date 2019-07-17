@@ -19,5 +19,6 @@ https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
 Following are some of the samples generated from this model
 
 |     Image     |     Ground Truth      |     Model Output      |
-|![alt text][https://github.com/Nerdyvedi/GSOC-Opencv-matting/tree/master/alphagan-matting/AlphaMatting/results/img1] | ![alt text][https://github.com/Nerdyvedi/GSOC-Opencv-matting/tree/master/alphagan-matting/AlphaMatting/results/gt1] |![alt text] [https://github.com/Nerdyvedi/GSOC-Opencv-matting/tree/master/alphagan-matting/AlphaMatting/results/pred1]
+| ------------- | --------------------  | --------------------- |
+|![alt text](https://github.com/Nerdyvedi/GSOC-Opencv-matting/tree/master/alphagan-matting/AlphaMatting/results/img1) | ![alt text](https://github.com/Nerdyvedi/GSOC-Opencv-matting/tree/master/alphagan-matting/AlphaMatting/results/gt1) |![alt text] (https://github.com/Nerdyvedi/GSOC-Opencv-matting/tree/master/alphagan-matting/AlphaMatting/results/pred1)
 |
