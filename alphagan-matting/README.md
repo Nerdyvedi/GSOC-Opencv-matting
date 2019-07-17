@@ -4,7 +4,9 @@ Implementation of AlphaGAN, a Generative adversial method for natural image matt
 ### Architecture ###
 
 #### Generator ####  
-A decoder encoder based architecture is used. This implementation is based on the implementation of Encode decoder architecture used in Deep image matting paper.
+A decoder encoder based architecture is used. 
+
+Encoder is the same as ResNet50 minus the last 2 layers.The implementation of decoder is based on the implementation decoder architecture used in Deep image matting paper.
 
 #### Discriminator ####
 The discriminator used here is the PatchGAN discriminator. The implementation here is inspired from the implementation of CycleGAN 
