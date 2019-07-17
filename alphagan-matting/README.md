@@ -33,4 +33,5 @@ Following are some of the samples generated from this model
 
 ### Training ###
  Use the following command to train the model
+ 
  ``` train.py --which-model-netG resnet50 ```
