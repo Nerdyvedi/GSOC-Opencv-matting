@@ -20,4 +20,4 @@ Following are some of the samples generated from this model
 
 |     Image     |     Ground Truth      |     Model Output      |
 | ------------- | --------------------  | --------------------- |
-|![alt text](https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/alphagan-matting/AlphaMatting/results/img1.png "img1") | ![alt text](https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/alphagan-matting/AlphaMatting/results/gt1.png "gt1") |![alt text] (https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/alphagan-matting/AlphaMatting/results/pred1.png "pred1")|
+|![alt text](https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/alphagan-matting/AlphaMatting/results/img1.png "img1") | ![alt text](https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/alphagan-matting/AlphaMatting/results/gt1.png "gt1") |![alt text](https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/alphagan-matting/AlphaMatting/results/pred1.png "pred1")|
