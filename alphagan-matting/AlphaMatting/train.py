@@ -1,7 +1,6 @@
 import time
 from options.train_options import TrainOptions
 from data.data_loader import CreateDataLoader
-from models.models import create_model
 from util.visualizer import Visualizer
 from image_pool import ImagePool
 
