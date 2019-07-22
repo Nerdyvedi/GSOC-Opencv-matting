@@ -8,6 +8,7 @@ Use the following command to run the program
  ```g++ pkg-config --cflags opencv globalmatting.cpp pkg-config --libs opencv -o matting```
 
 This produces an executable file called matting
+
 To run the executable file, use the following command
 
   ```./matting <Path to input image> <Path to trimap> <niter>(number of iterations for expansion of known regions[optional])```
