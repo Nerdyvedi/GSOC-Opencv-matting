@@ -15,3 +15,9 @@ Following were the results:
 | Connectivity error          |       28                        | 36.3                 |
 
 
+Some of the outputs with of this implementation are as follows :
+
+|    Image                    | Trimap                          | Alpha matte(this implementation)  |
+|![alt text](https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/Global-Sampling-Method-for-Alpha-Matting/Input/doll.png "img1" ) |![alt text](https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/Global-Sampling-Method-for-Alpha-Matting/trimap/doll.png "img1" ) |![alt text](https://raw.githubusercontent.com/Nerdyvedi/GSOC-Opencv-matting/master/Global-Sampling-Method-for-Alpha-Matting/Results/doll.png "img1" ) |
+
+
