@@ -55,5 +55,6 @@ Progress of alpha matting project
  7. Generated alpha matte for about 250 images using gimp.[Link](](https://drive.google.com/drive/folders/12esYUgcR5PDl_wfZXF9dBpNwvO_60yL9)
  
  8. Implemented muliple architectures for AlphaGAN matting. The results are much better than before but not as good as the original implementation.Following architectures have been implemented: 
-    a.Generator with Resnet50 Encoder        b.Generator with Deeplabv3 encoder
+    
+    #### a. #### Generator with Resnet50 Encoder       #### b.  #### Generator with Deeplabv3 encoder
 
