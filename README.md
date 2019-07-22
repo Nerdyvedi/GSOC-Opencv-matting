@@ -48,7 +48,7 @@ Progress of alpha matting project
      (Global sampling method-Vedanta is my implementation)
   
  5. Implemented AlphaGAN matting, but the results even when trained on Adobe dataset is not satisfactory.
-    #### Working on improving this now
+    
     
  6. Generated alpha matte for about 100 images using gimp.[Link](https://drive.google.com/drive/folders/12esYUgcR5PDl_wfZXF9dBpNwvO_60yL9)   
  
