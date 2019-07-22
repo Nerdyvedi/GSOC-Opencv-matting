@@ -2,6 +2,13 @@
 #include "opencv2/imgproc.hpp"
 #include "opencv2/highgui.hpp"
 #include <opencv2/ximgproc/edge_filter.hpp>
+#include "globalmatting.h"
+#include <string> 
+#include <iostream>
+#include <cstdlib>
+
+
+using namespace std;
 using namespace cv;
 
 template <typename T>
@@ -97,16 +104,16 @@ static float nearestDistance(const std::vector<cv::Point> &boundary, const cv::P
 
 
 // for sorting the boundary pixels according to intensity
-struct intensityComp
+struct IntensityComp
 {
-    intensityComp(const cv::Mat_<cv::Vec3b> &image) : image(image)
+    IntensityComp(const cv::Mat_<cv::Vec3b> &image) : image(image)
     {
 
     }
 
     bool operator()(const cv::Point &p0, const cv::Point &p1) const
     {
-        const cv::Vec3b &c0 = image(Ip0.y, p0.x);
+        const cv::Vec3b &c0 = image(p0.y, p0.x);
         const cv::Vec3b &c1 = image(p1.y, p1.x);
 
         return ((int)c0[0] + (int)c0[1] + (int)c0[2]) < ((int)c1[0] + (int)c1[1] + (int)c1[2]);
@@ -198,7 +205,7 @@ static void erodeFB(cv::Mat_<uchar> &trimap, int r)
 }
 
 
-struct sample
+struct Sample
 {
     int fi, bj;
     float df, db;
@@ -209,12 +216,12 @@ static void calculateAlphaPatchMatch(const cv::Mat_<cv::Vec3b> &image,
         const cv::Mat_<uchar> &trimap,
         const std::vector<cv::Point> &foregroundBoundary,
         const std::vector<cv::Point> &backgroundBoundary,
-        std::vector<std::vector<sample> > &samples)
+        std::vector<std::vector<Sample> > &samples)
 {
     int w = image.cols;
     int h = image.rows;
 
-    samples.resize(h, std::vector<sample>(w));
+    samples.resize(h, std::vector<Sample>(w));
 
     for (int y = 0; y < h; ++y)
         for (int x = 0; x < w; ++x)
@@ -253,7 +260,7 @@ static void calculateAlphaPatchMatch(const cv::Mat_<cv::Vec3b> &image,
 
             const cv::Vec3b &I = image(y, x);
 
-            sample &s = samples[y][x];
+            Sample &s = samples[y][x];
 
             for (int y2 = y - 1; y2 <= y + 1; ++y2)
                 for (int x2 = x - 1; x2 <= x + 1; ++x2)
@@ -264,7 +271,7 @@ static void calculateAlphaPatchMatch(const cv::Mat_<cv::Vec3b> &image,
                     if (trimap(y2, x2) != 128)
                         continue;
 
-                    sample &s2 = samples[y2][x2];
+                    Sample &s2 = samples[y2][x2];
 
                     const cv::Point &fp = foregroundBoundary[s2.fi];
                     const cv::Point &bp = backgroundBoundary[s2.bj];
@@ -299,7 +306,7 @@ static void calculateAlphaPatchMatch(const cv::Mat_<cv::Vec3b> &image,
 
                 const cv::Vec3b &I = image(y, x);
 
-                sample &s = samples[y][x];
+                Sample &s = samples[y][x];
 
                 for (int k = 0; ; k++)
                 {
@@ -470,10 +477,10 @@ static void globalMattingHelper(cv::Mat _image, cv::Mat _trimap, cv::Mat &_foreg
             foregroundBoundary.push_back(cv::Point(x, y));
     }
 
-    std::sort(foregroundBoundary.begin(), foregroundBoundary.end(), intensityComp(image));
-    std::sort(backgroundBoundary.begin(), backgroundBoundary.end(), intensityComp(image));
+    std::sort(foregroundBoundary.begin(), foregroundBoundary.end(), IntensityComp(image));
+    std::sort(backgroundBoundary.begin(), backgroundBoundary.end(), IntensityComp(image));
 
-    std::vector<std::vector<sample> > samples;
+    std::vector<std::vector<Sample> > samples;
     calculateAlphaPatchMatch(image, trimap, foregroundBoundary, backgroundBoundary, samples);
 
     _foreground.create(image.size(), CV_8UC3);
@@ -542,23 +549,39 @@ void globalMatting(cv::InputArray _image, cv::InputArray _trimap, cv::OutputArra
 
 #include "globalmatting.h"
 
+// you can get the guided filter implementation
+// from https://github.com/atilimcetin/guided-filter
+#include "guidedfilter.h"
 
-
-
-int main()
+int main(int argc,char** argv)
 {
-    cv::Mat image = cv::imread("Input/troll.png", CV_LOAD_IMAGE_COLOR);
-    cv::Mat trimap = cv::imread("Trimap/troll.png", CV_LOAD_IMAGE_GRAYSCALE);
+    if(argc<3)
+    {
+      cout<<"Enter the path of image and trimap"<<endl;
+      return 0;
+    }
+    
+    string img_path = argv[1];
+    string tri_path = argv[2];
+    int niter = 9;
+    if(argc==4)
+    {
+      niter = atoi(argv[3]);
+    } 
+      
+    cv::Mat image = cv::imread(img_path, CV_LOAD_IMAGE_COLOR);
+    cv::Mat trimap = cv::imread(tri_path, CV_LOAD_IMAGE_GRAYSCALE);
 
     // (optional) exploit the affinity of neighboring pixels to reduce the 
     // size of the unknown region. please refer to the paper
     // 'Shared Sampling for Real-Time Alpha Matting'.
-    expansionOfKnownRegions(image, trimap, 9);
+    expansionOfKnownRegions(image, trimap, niter);
 
     cv::Mat foreground, alpha;
     globalMatting(image, trimap, foreground, alpha);
 
     // filter the result with fast guided filter
+    //alpha = guidedFilter(image, alpha, 10, 1e-5);
     cv::ximgproc::guidedFilter(image,alpha,alpha,10,1e-5);
     for (int x = 0; x < trimap.cols; ++x)
         for (int y = 0; y < trimap.rows; ++y)
