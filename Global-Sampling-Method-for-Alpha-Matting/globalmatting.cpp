@@ -592,7 +592,7 @@ int main(int argc,char** argv)
                 alpha.at<uchar>(y, x) = 255;
         }
 
-    cv::imwrite("GT04-alpha.png", alpha);
+    cv::imwrite("output.png", alpha);
 
     return 0;
 }
