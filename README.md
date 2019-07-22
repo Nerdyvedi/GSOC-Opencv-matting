@@ -56,5 +56,6 @@ Progress of alpha matting project
  
  8. Implemented muliple architectures for AlphaGAN matting. The results are much better than before but not as good as the original implementation.Following architectures have been implemented: 
     
-    #### a. #### Generator with Resnet50 Encoder       #### b.  #### Generator with Deeplabv3 encoder
+    #### a. Generator with Resnet50 Encoder       b.  Generator with Deeplabv3 encoder  ####
+    
 
