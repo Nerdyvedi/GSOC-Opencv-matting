@@ -1,6 +1,15 @@
 # Global-Sampling-Method-for-Alpha-Matting
 This is a C++ implementation of "A Global Sampling Method for Alpha Matting" by Kaiming He, Christoph Rhemann, Carsten Rother, Xiaoou Tang,JianSun presented at CVPR 2011.
 
+
+### Steps ###
+Use the following command to run the program
+ `g++ `pkg-config --cflags opencv` globalmatting.cpp `pkg-config --libs opencv` -o matting`
+This produces an executable file called matting
+
+To run the executable file, use the following command
+  `./matting <Path to input image> <Path to trimap> <niter>(number of iterations for expansion of known regions[optional]) 
+
 ### Results ###
 
 After evaluating this implementation on alphamatting.com, the results are almost as good as the original implementation.
